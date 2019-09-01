@@ -6,26 +6,50 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>*
 </head>
 <body>
-		<canvas id="myChart"></canvas>
+	<div class="chart-container" style="position: relative; height:60vh; width:80vw; text-align: center; margin: 0 auto; margin-top: 10vh">
+   		<canvas id="myChart"></canvas>
+	</div>
 		<script>
+		class Modulo{
+			constructor(nome, num_questoes, acertos){
+				this.nome = nome;
+				this.num_questoes = num_questoes;
+				this.acertos = acertos;
+			} 
+		}
+		var modulo_1 = new Modulo('Matematica', 30, 10);
+		var modulo_2 = new Modulo('Libras', 40, 25);
+		var modulo_3 = new Modulo('Português', 40, 20);
+		var arr_modulo = new Array(modulo_1,modulo_2,modulo_3); 
 		var ctx = document.getElementById('myChart').getContext('2d');
 		var chart = new Chart(ctx, {
     // The type of chart we want to create
-	    type: 'pie',
+	    type: 'bar',
 
 	    // The data for our dataset
 	    data: {
-	        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-	        datasets: [{
-	            label: ['My First dataset','asdad','xxxasdad','ppasdpadp'],
-	            backgroundColor: ['rgb(255, 99, 132)','rgb(55, 99, 132)','rgb(255, 0, 132)','rgb(255, 99, 0)','rgb(255, 199, 162)','rgb(255, 99, 132)','rgb(255, 99, 132)'],
-	            borderColor: 'rgb(255, 99, 132)',
-	            data: [0, 10, 5, 2, 20, 30, 45]
+	    	labels: [], // Nome da coluna.
+	    	for(let i = 0; i < arr_modulo.length;i++){
+	    		labels.push(arr_modulo[i].nome)
+	    	}
+	    	datasets: [{
+	    		label: ['Bla'],
+	    		backgroundColor: ['rgb(255, 199, 32)','rgb(55, 99, 132)','rgb(255, 0, 132)'],
+	        		borderColor: 'rgb(255, 99, 132)',
+	        		data: [], // Dado numérico da coluna.
 	        }]
 	    },
 
+	    		for(let i = 0; i < arr_modulo.length;i++){
+	    			data.push(arr_modulo[i].acertos)
+	        	}
+
 	    // Configuration options go here
-	    options: {}
+	    options: {
+	    	responsive: true,
+    		maintainAspectRatio: false,
+    		responsiveAnimationDuration: 500,
+	    }
 	});
 	</script>		
 
